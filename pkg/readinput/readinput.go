@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func ReadInput(fileName string) []string {
+func ReadInput(fileName string, separator string) []string {
 	file, err := os.Open(fileName)
 	if err != nil {
 		panic(err)
@@ -16,5 +16,11 @@ func ReadInput(fileName string) []string {
 	if err != nil {
 		panic(err)
 	}
-	return strings.Split(trimmedInput, "\r\n")
+	parsedInput := strings.Split(trimmedInput, separator)
+
+	var cleanInput []string
+	for _, item := range parsedInput {
+		cleanInput = append(cleanInput, strings.TrimSpace(item))
+	}
+	return cleanInput
 }
